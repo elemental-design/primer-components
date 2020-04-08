@@ -1,30 +1,42 @@
+import React from 'react'
 import styled from 'styled-components'
-import ButtonBase from './ButtonBase'
+import ButtonBase, {ButtonText} from './ButtonBase'
 import {get} from './constants'
+import {makeShadow} from './utils/shadow'
+import {Platform} from './primitives'
 
-const ButtonOutline = styled(ButtonBase)`
+const StyledText = styled(ButtonText)`
+  color: ${get('buttons.outline.color.default')};
+`
+
+const ButtonOutline = styled(ButtonBase).attrs(({children, variant}) => ({
+  ...(Platform.OS !== 'web' && {
+    children: <StyledText variant={variant}>{children}</StyledText>,
+    name: 'ButtonOutline',
+  }),
+}))`
   color: ${get('buttons.outline.color.default')};
   border: 1px solid ${get('buttons.outline.border.default')};
   background-color: ${get('buttons.outline.bg.default')};
-  box-shadow: ${get('buttons.outline.shadow.default')};
+  ${makeShadow(get('buttons.outline.shadow.default'))}
 
   &:hover {
     color: ${get('buttons.outline.color.hover')};
     background-color: ${get('buttons.outline.bg.hover')};
     border-color: ${get('buttons.outline.border.hover')};
-    box-shadow: ${get('buttons.outline.shadow.hover')};
+    ${makeShadow(get('buttons.outline.shadow.hover'))}
   }
   // focus must come before :active so that the active box shadow overrides
   &:focus {
     border-color: transparent;
-    box-shadow: ${get('buttons.outline.shadow.focus')};
+    ${makeShadow(get('buttons.outline.shadow.focus'))}
   }
 
   &:active {
     color: ${get('buttons.outline.color.active')};
     background-color: ${get('buttons.outline.bg.active')};
     border-color: ${get('buttons.outline.border.active')};
-    box-shadow: ${get('buttons.outline.shadow.active')};
+    ${makeShadow(get('buttons.outline.shadow.active'))}
   }
 
   &:disabled {

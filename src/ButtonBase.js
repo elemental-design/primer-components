@@ -1,10 +1,12 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import {COMMON} from './constants'
 import theme from './theme'
-import buttonBaseStyles from './ButtonStyles'
+import buttonBaseStyles, {buttonTextStyles} from './ButtonStyles'
 import {compose, variant, layout, fontSize} from 'styled-system'
 import systemPropTypes from '@styled-system/prop-types'
+import Text from './Text'
 
 const variants = variant({
   variants: {
@@ -22,9 +24,16 @@ const variants = variant({
   }
 })
 
+export const ButtonText = styled(Text)`
+  ${buttonTextStyles}
+  ${fontSize}
+  ${variants}
+`
+
 const ButtonBase = styled.button.attrs(({disabled, onClick}) => ({
-  onClick: disabled ? undefined : onClick
+  onClick: disabled ? undefined : onClick,
 }))`
+  ${buttonTextStyles}
   ${buttonBaseStyles}
   ${variants}
   ${compose(fontSize, COMMON, layout)}

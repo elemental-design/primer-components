@@ -1,12 +1,16 @@
 import {css} from 'styled-components'
 import {get} from './constants'
 
+export const buttonTextStyles = css`
+  font-weight: ${get('fontWeights.bold')};
+  line-height: 20px;
+`
+
 export default css`
   position: relative;
   display: inline-block;
   padding: 6px 16px;
-  font-weight: ${get('fontWeights.bold')};
-  line-height: 20px;
+
   white-space: nowrap;
   vertical-align: middle;
   cursor: pointer;
